@@ -1,82 +1,82 @@
 
 # Spring Boot Backend Template
 
-# Açıklama
-Bu proje, bir kullanıcı yönetim sisteminin temel işlevlerini sağlayan bir uygulamadır. Spring Boot 3, JWT tabanlı kimlik doğrulama ve yetkilendirme, veri yönetimi ve rol tabanlı erişim gibi önemli özellikler içerir.
+# Description
+This project is a backend template application developed using **Spring Boot 3**. It includes features such as **dynamic role management**, **JWT-based authentication**, **multilingual support**, and **session user management**. **Liquibase** is used to manage database changes.
 
-## Kullanılan Teknolojiler
+# Technologies and Tools
 
-- **Java**: Backend için birincil programlama dili.
-- **Spring Boot 3**: RESTful API’ler geliştirmek için framework.
-- **Spring Security**: Kimlik doğrulama ve yetkilendirme.
-- **MapStruct**: DTO ve Entity dönüşümleri.
-- **Liquibase**: Veritabanı şeması yönetimi ve versiyon kontrolü.
-- **PostgreSQL**: Veritabanı yönetim sistemi.
-- **Spring Data JPA**: Veritabanı işlemleri için JPA.
-- **Redis**: Önbellek yönetimi.
-- **JWT (JSON Web Tokens)**: Token tabanlı kullanıcı oturumu güvenliği.
-- **Slf4j & Logback**: Loglama framework’ü.
-- **Maven**: Proje yönetimi ve bağımlılık konfigürasyonu.
+- **Java**: Primary programming language for the backend.
+- **Spring Boot 3**: Framework for developing RESTful APIs.
+- **Spring Security**: Authentication and authorization.
+- **MapStruct**: DTO and Entity conversion.
+- **Liquibase**: Database schema management.
+- **PostgreSQL**: Database.
+- **Spring Data JPA**:  JPA for database operations.
+- **Redis**: Cache management.
+- **JWT (JSON Web Token)**: Token-based user session security.
+- **Slf4j**: Logging framework.
+- **Maven**: Project management and dependency configuration.
 
-# Özellikler
+# Features
 
-- **JWT Tabanlı Kimlik Doğrulama**  
-  Kullanıcı girişleri için token oluşturma ve doğrulama.
+- **JWT-Based Authentication**  
+  Token generation and validation for user logins.
 
-- **Dinamik Rol Yönetimi**  
-  Rollerin (örn. `ADMIN`, `USER`) bir tabloda saklanması ve kullanıcılara dinamik olarak atanması.
+- **Dynamic Role Management**  
+  Roles (e.g., `ADMIN`, `USER`) are stored in a table and assigned dynamically to users.
 
-- **Liquibase ile Veritabanı Yönetimi**  
-  Veritabanı şeması Liquibase kullanılarak SQL formatında yönetilir.
+- **Liquibase for Database Management**  
+  Database schema is managed using Liquibase in SQL format.
 
-- **Çoklu Dil Desteği**  
-  Hata ve bilgilendirme mesajları `messages.properties` dosyalarında tanımlanmıştır.
+- **Multilingual Support**  
+  Error and informational messages are defined in `messages.properties` files.
 
-- **Oturum Yönetimi**  
-  Kullanıcı bilgileri oturumdan alınabilir.
+- **Session Management**  
+  User information can be retrieved from the session.
 
-- **Loglama**  
-  Tüm işlemler `DEBUG` ve `INFO` seviyelerinde loglanır.
+- **Logging**  
+  All actions are logged at `DEBUG` and `INFO` levels.
 
-# API Uç Noktaları
+# API Endpoints
 
-## Kimlik Doğrulama
+## Authentication
 
 - **POST** `/api/auth/register`  
-  Yeni bir kullanıcı kaydı.
+  Register a new user.
 
 - **POST** `/api/auth/login`  
-  Kullanıcı girişi.
+  User login.
 
-## Kullanıcı İşlemleri
+## User Operations
 
 - **GET** `/api/auth/user`  
-  Kullanıcı bilgilerini getir.
+  Fetch user information.
 
 - **GET** `/api/auth/welcome`  
-  Kullanıcıya özel bir hoş geldin mesajı.
+  User-specific welcome message.
 
 - **GET** `/api/auth/checkLocale`  
-  Locale kontrolü yap.
+  Check locale.
 
-# Kurulum
+# Setup
 
-## 1. **Bağımlılıkları Yükleyin:**
-Başlamak için gerekli bağımlılıkları yükleyin.
+## 1. **Install Dependencies:**
+To get started, you need to install the necessary dependencies.
 
    ```bash
    mvn clean install
    ```
 
-## 2. **Liquibase ile Veritabanı Kurulumu:**
-Veritabanı şemanızı Liquibase kullanarak oluşturun.
+## 2. **Run Liquibase for Database Setup:**
+Set up your database schema using Liquibase.
 
    ```bash
    mvn liquibase:update
    ```
 
-## 3. **Uygulamayı Başlatın:**
-Son olarak, uygulamayı çalıştırın.
+## 3. **Start the Application:**
+Finally, run the application.
 
    ```bash
    mvn spring-boot:run
@@ -88,44 +88,45 @@ Son olarak, uygulamayı çalıştırın.
 src/main
 ├── java/com/template/backendtemplate
 │   └── core
-│      ├── auth         # Kimlik doğrulama ve rol yönetimi
-│      ├── config       # Spring Security ve JWT yapılandırmaları
-│      ├── entity       # Temel Entity
+│      ├── auth         # Authentication and role management
+│      ├── config       # Spring Security and JWT configurations
+│      ├── entity       # Base Entity
 │      ├── exception    # Global Exception Handler
-│      ├── filter       # JWT filtreleri
+│      ├── filter       # JWT filters
 │      ├── listener     # Auditable Entity Listener
-│      ├── messages     # Çoklu dil desteği
-│      ├── model        # JWT Modelleri
-│      ├── service      # Oturum ve mesaj servisleri
-│      └── utils        # Yardımcı sınıflar (ör. JwtUtil)
+│      ├── messages     # Multilingual support
+│      ├── model        # JWT Models
+│      ├── service      # Session and message services
+│      └── utils        # Utility classes (e.g., JwtUtil)
 │   
 │
 ├── resources
-│   ├── db/changelog        # Liquibase değişiklik dosyaları
-│   ├── messages            # Çoklu dil dosyaları
-│   ├── application.yml     # Yapılandırma
-│   └── docker-compose.yml  # Yerel PostgreSQL ve Redis yapılandırması
+│   ├── db/changelog        # Liquibase changelog files
+│   ├── messages            # Multilingual files
+│   ├── application.yml     # Configuration
+│   └── docker-compose.yml  # Configuration for local PostgreSQL and Redis
 ```
 
-# Kurulum ve Çalıştırma
+# Installation & Running
 
-## Gereksinimler:
-- JDK 17 veya üzeri
+## Requirements:
+- JDK 17 or higher
 - Maven
-- PostgreSQL veritabanı
-- Redis (isteğe bağlı, önbellekleme için)
+- PostgreSQL database
+- Redis (optional, for caching)
 
-## Kurulum Adımları:
-1. Bu depoyu klonlayın.
+## Setup Instructions:
+1. Clone this repository.
    ```bash
    git clone https://github.com/erengumus/backend-template.git
+   ```
 
-2. Proje dizinine gidin.
+2. Navigate to the project directory.
    ```bash
    cd backend-template
    ```
 
-3. Bağımlılıkları yükleyin ve uygulamayı çalıştırın:
+3. Install dependencies and run the application:
    ```bash
    mvn clean install
    mvn spring-boot:run
@@ -133,4 +134,4 @@ src/main
 
 # License
 
-Bu proje MIT Lisansı ile lisanslanmıştır - detaylar için LICENSE dosyasına bakın.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
