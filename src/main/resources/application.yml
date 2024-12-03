@@ -1,0 +1,50 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/app_db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    #hibernate:
+      #ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+  messages:
+    encoding: UTF-8
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  liquibase:
+      change-log: classpath:db.changelog/db.changelog-master.xml
+      enabled: true
+      drop-first: false
+      contexts : sql,test-data,prod-data,data
+    #default-schema:
+
+jwt:
+  secret: M3hsTzlmNyNRXmtMIVpKdFJ4dzRNaCZWbkBQNSRkRjI=
+  access-token-expiration: 600000 # 10 minutes
+  refresh-token-expiration: 2592000000 # 30 days
+
+springdoc:
+  api-docs:
+    enabled: true  # API dokümantasyonunu etkinleştir
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true   # Swagger UI'yi etkinleştir
+    path: /swagger-ui.html  # Swagger UI özelleştirilmiş path
+logging:
+  level:
+    #root: debug
+    web: debug
+    org:
+      springframework:
+        security: debug
+    liquibase : debug
