@@ -45,6 +45,8 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException(messageService.getMessage(BusinessRuleMessages.ERR_0002));
         }
         UserEntity user =userMapper.toEntity(userRegisterDto);
+        String encodedPassword =  passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         userRepository.save(user);
         log.info("User successfully registered with email: {}", user.getEmail());
 
